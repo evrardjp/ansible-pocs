@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  tasks:
+  - name: Fail this task
+    fail:
+      msg: "This task will fail"
+    register: action_tested
+    until: action_tested | success
+    retries: 2
+    delay: 1
+    # the interesting lines follows:
+    failed_when: false
+  - name: But run this task
+    debug:
+      msg: "Status runned anyway"
+    when: action_tested | failed
