@@ -1,0 +1,79 @@
+---
+## Method 1: Use tags and intermediate handlers to target the
+# appropriate handlers. Not working
+- name: Apply service config
+  debug:
+    msg: "service x configuration"
+  changed_when: "{{ changed }}"
+  notify:
+    - handling service x restart
+  tags:
+    - method1
+    - service_config
+
+## Method 2: Use of 2 new variables (One for normal flow and one for
+# overriding it) to use conditionals in handlers. Working but inelegant.
+- name: Apply service config
+  debug:
+    msg: "service y configuration"
+  changed_when: "{{ changed }}"
+  notify:
+    - restart service y
+  tags:
+    - method2
+    - service_config
+
+- name: Force a restart of the service
+  debug:
+    msg: "force restart of service y"
+  when: conditionalhandler_force_restart | bool
+  changed_when: True
+  notify:
+    - restart service y
+  tags:
+    - method2
+    - service_restart
+
+## Method 3: Register and then use of tags + force variable.
+- name: Apply service config
+  debug:
+    msg: "service z configuration"
+  changed_when: "{{ changed }}"
+  register: service_z_conf
+  tags:
+    - method3
+    - service_config
+
+- name: restart service z
+  debug:
+    msg: "Restarting service z"
+  when: service_z_conf.changed or conditionalhandler_force_restart | bool
+  tags:
+    - method3
+    - service_restart
+
+## Method 4: Marking file and post task/flush handler
+- name: Apply service config
+  debug:
+    msg: "service a configuration"
+  changed_when: "{{ changed }}"
+  notify:
+    - marking service a restart
+  tags:
+    - method4
+    - service_config
+
+- meta: flush_handlers
+  tags:
+    - method4
+
+- name: restart service a
+  shell: rm /tmp/restart_required
+  args:
+    removes: /tmp/restart_required
+  notify:
+    - restart service a
+  tags:
+    - method4
+    - handling_restart
+    - service_restart
