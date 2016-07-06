@@ -1,0 +1,6 @@
+---
+- hosts: groupb
+  connection: local
+  tasks:
+    - include: included-tasks.yml
+      when: inventory_hostname in groups['groupb'][0]
