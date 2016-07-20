@@ -1,0 +1,5 @@
+---
+- hosts: groupa
+  connection: local
+  roles:
+    - template-with-info-from-different-group

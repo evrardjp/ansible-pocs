@@ -1,0 +1,5 @@
+{% for groupname in groups if (not groupname == 'all' or not groupname == 'ungrouped') %}
+  {% if groups[groupname]| length > 0 %}
+  do stuff with the group {{ groupname }}
+  {% endif %}
+{% endfor %}
