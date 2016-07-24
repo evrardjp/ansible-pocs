@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  vars:
+    lista:
+      - b
+      - a
+      - c
+    listb:
+      - c
+      - d
+  tasks:
+  - name: debug
+    debug:
+      msg: "{{ lista | union (listb) }}"
