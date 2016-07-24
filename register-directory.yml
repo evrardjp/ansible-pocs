@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: register ls
+      command: ls -1 .
+      register: foldercontent
+    - name: do when rc is fine
+      debug:
+        var: foldercontent
