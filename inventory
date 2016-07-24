@@ -5,3 +5,11 @@ localhost
 
 [groupc]
 localhost2
+
+[cinder_all]
+localhost
+
+[glance_all]
+
+[nova_all]
+localhost2

@@ -1,5 +1,9 @@
-{% for groupname in groups if (not groupname == 'all' or not groupname == 'ungrouped') %}
-  {% if groups[groupname]| length > 0 %}
-  do stuff with the group {{ groupname }}
-  {% endif %}
+Groups to evaluate:
+{% for groupname in groups if (not (groupname == 'all' or groupname == 'ungrouped')) %}
+- {{ groupname }}: length={{ groups[groupname] | length }}
+{% endfor %}
+
+Condition tested:
+{% for key, value in os_group.items() if not (skip_unnecessary| bool and groups[key | replace('os_', '') + '_all'] | length == 0 ) %}
+{{ key }}, {{value}}
 {% endfor %}
