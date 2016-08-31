@@ -1,0 +1,5 @@
+---
+# handlers file for role_with_notify_and_handler
+- name: Restart Service X
+  debug:
+    msg: "Well, it looks it was triggered"

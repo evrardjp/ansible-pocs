@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  connection: local
+  roles:
+    - role_with_notify_and_handler
+    - role_with_notify_only
+
+# Verify the handler doesn't exist anymore because it's in another play.
+- hosts: localhost
+  connection: local
+  roles:
+    - role_with_notify_only
