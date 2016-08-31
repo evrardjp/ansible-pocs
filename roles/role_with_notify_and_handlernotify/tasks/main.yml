@@ -1,0 +1,9 @@
+---
+# tasks file for role_with_notify_and_handlernotify
+- name: This task is changed
+  debug:
+    msg: |
+      "So, we added something in the latest role.
+      Please notify a chain of events"
+  changed_when: True
+  notify: "Restart Service Y"

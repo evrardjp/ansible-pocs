@@ -4,6 +4,7 @@
   roles:
     - role_with_notify_and_handler
     - role_with_notify_only
+    - role_with_notify_and_handlernotify
 
 # Verify the handler doesn't exist anymore because it's in another play.
 - hosts: localhost

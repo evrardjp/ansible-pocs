@@ -5,3 +5,6 @@
     msg: "So, notify a service restart"
   changed_when: True
   notify: "Restart Service X"
+
+- name: Flush handlers
+  meta: flush_handlers

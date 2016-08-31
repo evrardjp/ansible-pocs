@@ -1,0 +1,6 @@
+---
+# handlers file for role_with_notify_and_handlernotify
+- name: Restart Service Y
+  debug:
+    msg: "Well, it looks I was triggered. Please continue chain of triggering"
+  notify: "{{ next_event_to_notify }}"

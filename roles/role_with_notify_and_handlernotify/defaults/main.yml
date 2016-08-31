@@ -1,0 +1,3 @@
+---
+# defaults file for role_with_notify_and_handlernotify
+next_event_to_notify: "Restart Service X"
