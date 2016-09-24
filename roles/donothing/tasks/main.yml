@@ -1,0 +1,5 @@
+---
+# tasks file for donothing
+- name: debug
+  debug:
+    msg: "I did this task now"
