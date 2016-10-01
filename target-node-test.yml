@@ -1,0 +1,6 @@
+---
+- hosts: nova_all
+  connection: local
+  roles:
+    - role: target_nodes
+
