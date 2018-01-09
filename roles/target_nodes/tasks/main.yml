@@ -1,9 +1,0 @@
----
-# tasks file for target-nodes
-- name: This will show that all[0] isn't the first node of the play whose role applies to, but the first node of the inventory.
-  debug:
-    msg: "Running {{ groups['all'][0] }}"
-
-- name: This will output the first node of the play.
-  debug:
-    msg: "Running {{ play_hosts[0] }}"

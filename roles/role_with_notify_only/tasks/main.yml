@@ -1,9 +1,0 @@
----
-# tasks file for role_with_notify_only
-- name: This task is changed
-  debug:
-    msg: |
-      "So, notify a service restart, but will it work?
-      The handler doesn't exist here in this role"
-  changed_when: True
-  notify: "Restart Service X"

@@ -1,5 +1,0 @@
----
-# tasks file for template-with-info-from-different-group
-- template:
-    src: "template.sh.j2"
-    dest: "/tmp/templated.sh"

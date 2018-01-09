@@ -1,3 +1,2 @@
 *.retry
-ansible.cfg
 .DS_Store

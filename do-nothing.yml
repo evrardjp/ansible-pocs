@@ -1,9 +1,0 @@
----
-- hosts: all
-  connection: local
-  serial: 1
-  pre_tasks:
-    - debug:
-        msg: "Pretask running on {{ inventory_hostname }}"
-  roles:
-    - donothing
