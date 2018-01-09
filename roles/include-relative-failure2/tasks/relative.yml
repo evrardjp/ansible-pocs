@@ -1,0 +1,2 @@
+---
+- include: another-relative.yml

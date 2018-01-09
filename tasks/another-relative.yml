@@ -1,0 +1,3 @@
+---
+- debug:
+    msg: "This is a task from my playbook dir"

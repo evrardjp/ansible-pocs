@@ -1,0 +1,3 @@
+---
+# tasks file for include-relative-failure2
+- include: relative.yml
