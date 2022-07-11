@@ -1,0 +1,8 @@
+---
+- hosts: haproxy
+  roles:
+    - role: test
+      tags:
+        - keepalived
+  tags:
+    - haproxy

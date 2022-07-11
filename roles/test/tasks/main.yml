@@ -1,0 +1,20 @@
+---
+# tasks file for test
+- include_vars: ubuntu.yml
+  tags:
+    - test-config
+    - test-install
+    - test-run
+
+- debug:
+    msg: "woot config"
+  tags:
+    - test-config
+- debug:
+    msg: "woot install"
+  tags:
+    - test-install
+- debug:
+    msg: "woot run"
+  tags:
+    - test-run

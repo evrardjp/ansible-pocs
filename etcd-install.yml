@@ -1,0 +1,5 @@
+---
+- hosts: etcd
+  connection: local
+  roles:
+    - role: etcd

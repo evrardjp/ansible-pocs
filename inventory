@@ -1,0 +1,5 @@
+[etcd]
+localhost ansible_connection=local
+
+[haproxy]
+localhost2 ansible_connection=local

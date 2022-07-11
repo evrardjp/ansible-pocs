@@ -1,56 +1,32 @@
-This tests ansible 2.4 relative include behavior.
+This tests tags and their include.
+
+Context
+=======
+
+A contributor of ansible-keepalived wanted to avoid 'tags: always'
+Reason: On his environement, the lookup failed (yet another include precedence failure I guess).
+While we need to figure out why the inclusion failed, we can try to avoid the tag always.
+
+But how?
 
 Step 1
 ======
 
-Create an ansible.cfg so that you can define where your roles will be stored (this folder should do)
+Any role can't know what it is wrapped with (check the test-install playbook).
+So we can only figure out the tags that are inside the role.
+
+If we replace the 'always' tag with ALL THE TAGS of the role, it could work.
+
+PoC in this branch.
 
 Step 2
 ======
 
-Go into this folder. You should have a tasks/ folder relative to a playbook named test.yml.
-This test.yml loads a role, not tasks.
+Run ansible-playbook -i inventory play.yml --tags keepalived.
+It does all the tasks, as expected.
 
-Step 3
-======
+Run ansible=playbook -i inventory play.yml --tags keepalived-config 
+It does only config tasks, as expected.
 
-Run ansible-playbook test.yml. See it execute tasks/relative.yml instead of the role relative include.
-
--- That's for me an unexpected behavior but it runs the same under ansible 2.3 and ansible 2.4
-
-Step 4
-======
-
-Go to roles/include-relative-failure2 folder. This is to confirm the phenomenon.
-
-Step 5
-======
-
-Run ansible-playbook tests/test.yml. See it execute tasks/relative.yml from include-relative-failure2
-instead of the role asked in the playbook.
-
--- This is a discrepency compared to ansible 2.3
-
-This proves that the precedence has changed between Ansible 2.3 and 2.4, with paths from the CLI/playbookdir
-having more precedence for the include than paths from the role itself, in a role.
-
-
-Results
-=======
-
-For 2.3, during step 5 (-vv):
-
-TASK [include-relative-failure : debug] ********************************************************************************************************************************************************************************************************************************************************************
-task path: /Users/jean0000/evrardjp/ansible-pocs/roles/include-relative-failure/tasks/another-relative.yml:2
-ok: [localhost] => {
-    "changed": false,
-    "msg": "This is a role relative include"
-}
-
-For 2.4 during step 5 (-vv):
-
-TASK [include-relative-failure : debug] ********************************************************************************************************************************************************************************************************************************************************************
-task path: /Users/jean0000/evrardjp/ansible-pocs/roles/include-relative-failure2/tasks/another-relative.yml:2
-ok: [localhost] => {
-    "msg": "This is a task relative from my run dir"
-}
+Run ansible-playbook -i inventory play.yml --tags etcd
+It skips the include and skip all the role tasks, as expected.
